@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pepper Room — Nigerian pantry staples</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1ECF2;--card:#fff;--ink:#1E1420;--mute:#6B5F70;--line:#DDD3E0;--btn:#4A0E2B;--btn-ink:#fff;
+--zobo:#4A0E2B;--yaji:#E08A1E;--ata:#D62F1F;--rice:#2F5D3A;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16101A;--card:#221A27;--ink:#F3EAF0;--mute:#A99BAE;--line:#3A2F40;--btn:#F3EAF0;--btn-ink:#1E1420}}
+:root[data-theme="dark"]{--bg:#16101A;--card:#221A27;--ink:#F3EAF0;--mute:#A99BAE;--line:#3A2F40;--btn:#F3EAF0;--btn-ink:#1E1420}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ata);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+.cartbtn{background:var(--btn);color:var(--btn-ink);border:0;border-radius:999px;padding:10px 18px;font-weight:600;cursor:pointer}
+.hero{padding:40px 0 36px;max-width:760px}
+h1{font-size:clamp(2.4rem,7vw,4.6rem);line-height:1;letter-spacing:-.035em;font-weight:800;margin:0 0 18px}
+.hero p{font-size:1.15rem;color:var(--mute);max-width:52ch;margin:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:64px}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+.item{background:var(--card);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.pack{min-height:230px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+.pack b{font-size:clamp(2.2rem,6vw,3.4rem);line-height:.95;letter-spacing:-.04em;font-weight:800}
+.pack span{font-size:.95rem;font-weight:600;opacity:.85}
+.info{padding:20px 22px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.info h2{margin:0;font-size:1.3rem;letter-spacing:-.02em}
+.info p{margin:0;color:var(--mute);max-width:44ch}
+.buy{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px}
+.price{font-size:1.4rem;font-weight:800;letter-spacing:-.02em}
+.add{background:var(--btn);color:var(--btn-ink);border:0;border-radius:12px;padding:11px 18px;font-weight:600;cursor:pointer}
+.add:active{transform:scale(.97)}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mute);font-size:.95rem}
+.scrim{position:fixed;inset:0;background:rgba(20,10,25,.55);opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+aside{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--bg);transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+aside.on{transform:none}
+@media (prefers-reduced-motion:reduce){aside,.scrim{transition:none}}
+.dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.dh h3{margin:0;font-size:1.4rem;letter-spacing:-.02em}
+.x{background:none;border:0;font-size:1.6rem;line-height:1;cursor:pointer;padding:4px 8px}
+.line{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.sw{width:52px;height:52px;border-radius:12px}
+.line small{color:var(--mute)}
+.qty{display:flex;align-items:center;gap:8px;margin-top:4px}
+.qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.tot{display:flex;justify-content:space-between;font-size:1.2rem;font-weight:800;padding:18px 0}
+.big{width:100%;background:var(--btn);color:var(--btn-ink);border:0;border-radius:14px;padding:14px;font-weight:600;font-size:1rem;cursor:pointer}
+.big:disabled{opacity:.4;cursor:not-allowed}
+.link{background:none;border:0;color:var(--mute);text-decoration:underline;cursor:pointer;margin-top:10px;padding:6px}
+label{display:block;font-weight:600;font-size:.95rem;margin:0 0 14px}
+input,textarea{display:block;width:100%;margin-top:6px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.empty{color:var(--mute);padding:24px 0}
+.done{padding:24px 0}.done h4{font-size:1.6rem;letter-spacing:-.02em;margin:0 0 10px}
+
+/* ---------- loading screen (2.5s) ---------- */
+#loader{position:fixed;inset:0;z-index:100;background:var(--zobo);color:#F7DCE8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));transition:transform .7s cubic-bezier(.76,0,.24,1)}
+#loader.out{transform:translateY(-100%)}
+.chips{display:flex;gap:10px}
+.chips i{width:clamp(44px,12vw,64px);height:clamp(44px,12vw,64px);border-radius:16px;display:block;opacity:0;transform:translateY(24px) scale(.85);animation:pop .55s cubic-bezier(.2,.9,.3,1.3) forwards}
+.chips i:nth-child(1){background:var(--yaji);animation-delay:.15s}
+.chips i:nth-child(2){background:var(--ata);animation-delay:.4s}
+.chips i:nth-child(3){background:#F7DCE8;animation-delay:.65s}
+.chips i:nth-child(4){background:var(--rice);animation-delay:.9s}
+@keyframes pop{to{opacity:1;transform:none}}
+.lname{font-weight:800;font-size:clamp(2rem,8vw,3.2rem);letter-spacing:-.035em;line-height:1;overflow:hidden}
+.lname span{display:inline-block;transform:translateY(110%);animation:rise .6s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{to{transform:none}}
+.bar{width:min(240px,60vw);height:4px;border-radius:4px;background:rgba(247,220,232,.2);overflow:hidden}
+.bar b{display:block;height:100%;width:100%;background:#F7DCE8;transform-origin:left;transform:scaleX(0);animation:fill 2.5s cubic-bezier(.45,.05,.3,1) forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+
+/* ---------- entrance (runs once after the loader lifts) ---------- */
+body.loading{overflow:hidden}
+.reveal{opacity:0}
+body.ready .reveal{opacity:1;animation:enter .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0) * 90ms)}
+@keyframes enter{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+body.ready h1 .w{opacity:1;display:inline-block;animation:word .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--w,0) * 70ms + 100ms)}
+@keyframes word{from{opacity:0;transform:translateY(.5em) rotate(2deg)}to{opacity:1;transform:none}}
+h1 .w{opacity:0}
+
+/* ---------- ongoing life ---------- */
+.pack{position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.pack::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.item:hover .pack::after{transform:translateX(120%);transition:transform .8s ease}
+.item:hover .pack{transform:scale(1.02)}
+.item{transition:transform .3s ease}
+.item:hover{transform:translateY(-4px)}
+.pack b{display:inline-block;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.item:hover .pack b{transform:translateX(6px)}
+.bump{animation:bump .4s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes bump{40%{transform:scale(1.18)}}
+.add.ok{background:var(--rice);color:#fff}
+
+@media (prefers-reduced-motion:reduce){
+  #loader{transition:none}
+  .chips i,.lname span{animation-duration:.01s;animation-delay:0s}
+  .bar b{animation-duration:.01s}
+  .reveal{opacity:1}body.ready .reveal{animation:none}
+  h1 .w{opacity:1}body.ready h1 .w{animation:none}
+  .item,.pack,.pack b{transition:none}.bump{animation:none}
+}
+</style>
+
+</head>
+<body class="loading">
+<div id="loader" aria-label="Loading Pepper Room" role="status">
+  <div class="chips" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="lname" aria-hidden="true"><span style="animation-delay:.3s">Pepper</span> <span style="animation-delay:.45s">Room</span></div>
+  <div class="bar" aria-hidden="true"><b></b></div>
+</div>
+
+<div class="wrap">
+  <header class="reveal" style="--i:0">
+    <div class="logo">Pepper Room</div>
+    <button class="cartbtn" id="open" aria-label="Open cart">Cart (<span id="count">0</span>)</button>
+  </header>
+  <section class="hero">
+    <h1 id="h1">Four staples from a Lagos kitchen.</h1>
+    <p class="reveal" style="--i:6">Suya spice, fried pepper sauce, zobo mix and ofada rice. Packed in small batches and delivered within Nigeria in 2–4 days.</p>
+  </section>
+  <main class="grid" id="grid"></main>
+  <footer class="reveal" style="--i:14">Pepper Room, Lagos. Questions about an order? Message us on WhatsApp.</footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside id="drawer" aria-hidden="true" aria-label="Cart">
+  <div class="dh"><h3 id="dtitle">Your cart</h3><button class="x" id="close" aria-label="Close cart">&times;</button></div>
+  <div id="body"></div>
+</aside>
+
+<script>
+const P=[
+ {id:"yaji",name:"Suya spice (yaji)",short:"Yaji",desc:"Ground peanut, ginger and dried chilli blend for grilling and roasting.",size:"250 g jar",price:3500,bg:"#E08A1E",fg:"#2A1600"},
+ {id:"ata",name:"Ata din din",short:"Ata din din",desc:"Slow-fried red pepper sauce. Spoon it over rice, eggs or yam.",size:"400 ml bottle",price:4800,bg:"#D62F1F",fg:"#FFF3EE"},
+ {id:"zobo",name:"Zobo mix",short:"Zobo",desc:"Dried hibiscus with ginger, cloves and pineapple peel. Steep, chill, serve.",size:"200 g pack",price:2900,bg:"#4A0E2B",fg:"#F7DCE8"},
+ {id:"ofada",name:"Ofada rice",short:"Ofada rice",desc:"Unpolished local rice with a nutty, earthy flavour. Stone-picked.",size:"2 kg bag",price:7500,bg:"#2F5D3A",fg:"#E8F5E9"}
+];
+const $=s=>document.querySelector(s);
+const money=n=>"₦"+n.toLocaleString("en-NG");
+let cart={},view="cart",order="";
+try{cart=JSON.parse(localStorage.getItem("pr-cart")||"{}")||{}}catch(e){cart={}}
+const save=()=>{try{localStorage.setItem("pr-cart",JSON.stringify(cart))}catch(e){}};
+const items=()=>P.filter(p=>cart[p.id]>0);
+const total=()=>items().reduce((s,p)=>s+p.price*cart[p.id],0);
+
+$("#grid").innerHTML=P.map(p=>`
+<article class="item reveal" style="--i:${8+P.indexOf(p)}">
+  <div class="pack" style="background:${p.bg};color:${p.fg}"><b>${p.short}</b><span>${p.size}</span></div>
+  <div class="info"><h2>${p.name}</h2><p>${p.desc}</p>
+  <div class="buy"><span class="price">${money(p.price)}</span><button class="add" data-id="${p.id}">Add to cart</button></div></div>
+</article>`).join("");
+
+function open(v){if(v)view=v;$("#drawer").classList.add("on");$("#scrim").classList.add("on");$("#drawer").setAttribute("aria-hidden","false");draw()}
+function shut(){$("#drawer").classList.remove("on");$("#scrim").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true");if(view==="done"){cart={};save();view="cart";update()}}
+function update(){$("#count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);draw()}
+function change(id,d){cart[id]=Math.max(0,(cart[id]||0)+d);if(!cart[id])delete cart[id];save();update()}
+
+function draw(){
+  const b=$("#body"),list=items();
+  if(view==="done"){
+    $("#dtitle").textContent="Order placed";
+    b.innerHTML=`<div class="done"><h4>Thank you, order ${order}.</h4><p>We'll message you on the phone number you gave to confirm delivery and payment details.</p><button class="big" id="fin">Back to shop</button></div>`;
+    $("#fin").onclick=shut;return;
+  }
+  if(view==="form"){
+    $("#dtitle").textContent="Delivery details";
+    b.innerHTML=`<form id="f">
+      <label>Full name<input name="n" required autocomplete="name"></label>
+      <label>Phone number<input name="p" type="tel" required autocomplete="tel" placeholder="080..."></label>
+      <label>Delivery address<textarea name="a" rows="3" required autocomplete="street-address"></textarea></label>
+      <div class="tot"><span>Total</span><span>${money(total())}</span></div>
+      <button class="big" type="submit">Place order</button>
+      <button class="link" type="button" id="back">Back to cart</button></form>`;
+    $("#back").onclick=()=>{view="cart";draw()};
+    $("#f").onsubmit=e=>{e.preventDefault();order="PR-"+Math.random().toString(36).slice(2,7).toUpperCase();view="done";draw()};
+    return;
+  }
+  $("#dtitle").textContent="Your cart";
+  if(!list.length){b.innerHTML=`<p class="empty">Your cart is empty. Add a product to get started.</p>`;return}
+  b.innerHTML=list.map(p=>`
+    <div class="line"><div class="sw" style="background:${p.bg}"></div>
+    <div><strong>${p.name}</strong><br><small>${money(p.price)} each</small>
+    <div class="qty"><button data-d="-1" data-id="${p.id}" aria-label="Remove one ${p.name}">−</button><span>${cart[p.id]}</span><button data-d="1" data-id="${p.id}" aria-label="Add one ${p.name}">+</button></div></div>
+    <strong>${money(p.price*cart[p.id])}</strong></div>`).join("")+
+    `<div class="tot"><span>Subtotal</span><span>${money(total())}</span></div><button class="big" id="go">Continue to delivery</button>`;
+  $("#go").onclick=()=>{view="form";draw()};
+}
+
+document.addEventListener("click",e=>{
+  const a=e.target.closest(".add");if(a){change(a.dataset.id,1);open("cart");return}
+  const q=e.target.closest(".qty button");if(q)change(q.dataset.id,+q.dataset.d);
+});
+$("#open").onclick=()=>open("cart");
+$("#close").onclick=shut;$("#scrim").onclick=shut;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")shut()});
+update();
+
+/* split headline into words for the staggered entrance */
+const h1=$("#h1");h1.setAttribute("aria-label",h1.textContent);
+h1.innerHTML=h1.textContent.split(" ").map((w,i)=>`<span class="w" aria-hidden="true" style="--w:${i}">${w}</span>`).join(" ");
+
+/* 2.5s loader, then lift and start the entrance */
+const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+setTimeout(()=>{
+  $("#loader").classList.add("out");
+  document.body.classList.remove("loading");
+  document.body.classList.add("ready");
+  setTimeout(()=>$("#loader").remove(),800);
+},still?300:2500);
+
+/* feedback when adding to cart */
+document.addEventListener("click",e=>{
+  const a=e.target.closest(".add");if(!a)return;
+  const c=$(".cartbtn");c.classList.remove("bump");void c.offsetWidth;c.classList.add("bump");
+  const t=a.textContent;a.textContent="Added";a.classList.add("ok");
+  setTimeout(()=>{a.textContent=t;a.classList.remove("ok")},1100);
+});
+</script>
+</body>
+</html>
